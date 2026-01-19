@@ -1,0 +1,772 @@
+---
+title: "R Workshop, Day 1"
+author: "Toby Trotta, Applied Research Lab"
+date: "Spring 2024"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Day 1: Introduction to R and RStudio, Directory Management, and Dataframes:
+
+## What is R?
+
+R is a **programming language** used for statistical analysis and data
+visualization. RStudio, on the other hand, is an open-source
+**integrated development environment (IDE)** for the R programming
+language; IDEs provide the necessary tools to *efficiently* develop
+code. We use "R" and "RStudio" synonymously, but they are different in
+theory.
+
+(If you might like to work/take notes in RMarkdown, the file type we are
+using currently, you can *italicize* or **bold** using single or double
+asterisks.)
+
+RStudio is comprised of four main windows:
+
+    - `Source`, which is where this is written. Here, we can execute code and write. If we were using a script (.R) file, every line would be code, and you'd have to comment every single note.
+    
+    - `Console`, a text-based interface to execute (run) code -- this is
+    also where our output will populate. (includes `Terminal`, `Render`
+    and `Background Jobs`; these are not important to the workshop and
+    can be disregarded)
+    
+    - `Environment`, which stores objects created during a **session**
+      - A session is a running instance of RStudio. Each time you exit RStudio, unless using an RProject file to keep everything together, any variables, dataframes, or models will be erased. You will  be prompted before this happens, so don't worry! Just don't click too fast :)
+      
+    - `Files`, show the available directories and all files (includes
+    `Plots`, `Packages`, `Help`, `Viewer`, `Presentation`; the latter
+    two will not be discussed)
+
+## RProjects: mapping file explorer to Rstudio
+
+RProject files are used to quickly open the currently stored settings,
+directory, and environment of a session. They do not require "saving",
+as it acts as the supervisor of all the moving parts. Creating an Rproj
+file can be done by: `File > New Project` \*\* Note: This is the "File"
+in the top banner, not the "Files" pane to the right.
+
+## Directory Management:
+
+Every file on your computer is stored in a *directory*. The directory
+acts as a file system cataloging structure allowing users to reference
+computer files and other directories. Directories can be simply
+associated with the folders in your File Explorer. (File Explorer, find
+Mac version)
+
+The *working (current) directory* is the directory (ie. location) where
+the system will default to for accessing files read ("referenced",
+"called") in your Script or Markdown document. The working directory can
+be changed by command using `setwd(path)` -- this method is much more
+challenging for novice programmers. However, simplified by RStudio, we
+may instead access
+`Session > Set Working Directory > Choose Directory...` in the top
+banner or using the keyboard shortcut `CTRL + SHIFT + H`.
+
+Once the directory is set using any of the above methods, the `Files`
+pane to the right will update to show all files (photos, Word documents,
+R scripts, etc.) in the chosen directory.
+
+Using `setwd("path")` can be conveniently referenced in RStudio under the
+`New Folder` icon in the `Files` pane. The path, for example, would look
+something like "C:/Users/tobyt/OneDrive/Documents/ARL/RWorkshop", with
+the complete command being
+`setwd("C:/Users/tobyt/OneDrive/Documents/ARL/RWorkshop")`. This takes a
+bit more practice, but isn't incredibly necessary if you have everything
+you need stored in a *project*.
+
+## Basic Arithmetic:
+
+Rstudio is powerful enough to run 2 + 2. Let's try it:
+
+```{r}
+
+```
+
+** A quick way to create a **chunk**, where the code can be executed,
+by using `CTRL + ALT + I` (`CMD + OPTION + I` on MacOS).
+
+See in the console below, we have the expression that was executed
+`> 2 + 2 # CTRL + ENTER to run the current line` and the **output**:
+`[1] 4`
+
+```{r}
+# Let's create some variables:
+
+```
+
+See in the Environment to your right, we now have variables `x` and `y`
+stored for this session that we can use in any chunk throughout the
+document. Both `<-` and `=` can be used for assigning variables, but
+`<-` is the R standard. The keyboard shortcut is `ALT + -` (add Mac).
+Note that you have to be in a chunk for the shortcut to work correctly.
+(how to store changes between programs)
+
+We can remove unwanted objects stored in the environment by using
+`rm(object_name)` in the console. Or, conveniently, right-click the
+variable in the environment and select "Delete" -- these are the pros of
+IDEs.
+
+```{r}
+# To see the output:
+
+
+# or:
+
+```
+
+We can of course apply the other arithmetic operators:
+
+```{r}
+ # Subtraction
+ # Multiplication
+ # Division
+ # Exponentiation
+```
+
+-   If we want to run this entire chunk at once, `CTRL + SHIFT + ENTER`
+    (Windows) or `CMD + SHIFT + ENTER` (MacOS).
+
+Or we can apply logical operators:
+
+```{r}
+ # Less than
+ # Less than or equal to
+ # Greater than or equal to
+ # Is equal to
+```
+
+## Vectors:
+
+We introduce an essential topic in mathematics, statistics, data
+analysis -- a **vector**. Vectors are defined differently by discipline,
+but for purposes of this workshop, consider the following definition:
+
+A *vector* is a one-dimensional array. To supplement the definition of
+"vector," an *array* is a collection of items or data, which can be
+stored in memory (via `<-` in R).
+
+```{r}
+ # c() creates a list (can be either row or column)
+ # Both endpoints are included in the vector
+```
+
+Similar to before, we can apply both arithmetic and logic to vectors:
+
+```{r}
+
+```
+
+In the event we need to remove an item from a vector, there are two
+primary methods:
+
+```{r}
+ # Removes 4th item
+
+ # Removes all 5s using logic, read "items in v2 not equal to 5"
+
+ # Remove every second item
+```
+
+## Data Types
+
+We can partition data into three primary categories:
+
+-   `numeric` (1.2, -35, 2.343e3)
+    -   `integer` (-3, 10, 43)
+    -   `double` (-7.18, 3.14, 5)
+    -   `float` (-7.18, 3.14, 5)
+    -   `complex` (2 + 2i, 1 - 3i)
+-   `character`, aka `string` ("t", "I love R", "2")
+-   `boolean`, aka `logical` (binary, dichotomous) (TRUE, T, FALSE, F)
+
+**Q:** What's the difference between a `double` and a `float`?
+
+**A:** They are both used to represent real number values (ie. not
+complex, including the imaginary term i). A `double` eliminates
+computational errors when rounding; it is the preferred numeric type.
+
+**Q:** What's the difference between an `integer` and a `double`?
+
+**A:**  
+
+**Q:** If the data is a `double`, then it is an `integer`. True or
+False?
+
+**A:** 
+
+**Q:** If the data is an `integer`, then it is a `double`. True or
+False?
+
+**A:** 
+
+What type of data is the vector?
+```{r}
+
+```
+
+## Creating Data Frames
+
+(You likely wont do this LOL)
+
+We can either create a dataframe in R or import an existing data frame
+(with Excel extension `.csv` or a `.txt` file).
+
+I find the simplest way (although there are numerous methods to creating
+an empty data frame) is first to create an empty **matrix** then convert
+to a data frame.
+
+```{r}
+ # '' is the empty string
+ # advantages of df vs matrix
+
+# The functions matrix and data.frame are included in base R (no special packages need installed or loaded)
+```
+
+Before we continue, let's discuss how to navigate the cells within a
+matrix (can be applied exactly the same way for data frames):
+
+When programming, we access a dataframe's (or matrix's) cells by
+describing the location of the value. For example, consider the
+following matrix (this can be associated with selecting a cell in Excel)
+
+```{r}
+
+```
+
+*Note:* By default, when using the `matrix()` function, items are stored
+vertically and move across columns. If this is how you wish to format
+your data, you can stop here. However, it's more convenient for users to
+input data (using `c()`) horizontally and have it presented the same
+way:
+
+If we instead wanted 1 2 3 across the first row, we include the argument
+`byrow = TRUE`:
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+How can I access the `1` entry in `df1`? We see it is located at the
+intersection of the first row and first column. To "retrieve" the value,
+we use brackets: `dataframe[row#, col#]`
+
+***Note:*** If you are familiar with programming, it is common for
+matrix/dataframe indices to start at `0`. With R, indices start at `1`.
+One will argue `0` is superior, but we don't start counting at 0, do
+we?... LOL
+
+```{r}
+
+```
+
+What if we want the entire first row?
+
+```{r}
+ # In this case, we don't specify which column we want. It will grab all entries in the first row.
+```
+
+And similarly for the first column?
+
+```{r}
+ # Now we don't specify the row number. Note: It is presented as a "row," but stored as a column.
+```
+
+Given the values stored in `df1`, at what location is `3` stored? Try
+and get the output:
+
+```{r}
+
+```
+
+Try printing the second column:
+
+```{r}
+
+```
+
+**Challenge:** Use the values stored in `df1` to find 3 \* 2:
+
+```{r}
+
+```
+
+Now we have a 3 (row) by 3 (column) data frame. Of course the default
+headers `X1`, `X2`, and `X3` are not very descriptive. These could be
+any data type and represent many different things. That said, we can
+change our column headers to accurately represent what is stored in the
+column:
+
+We want to change the column names for data frame 1:
+
+```{r}
+
+```
+
+**Note:** We can find the data types listed under the variable names.
+`<int>` represents "integer", a type of numeric value.
+
+To store by row, we state which row to add data to (`df[1, ]` represents
+the first row, all columns):
+
+```{r}
+
+```
+
+We obviously don't want to enter data row by row -- that disregards the
+efficiency of RStudio. Instead, we can create separate lists of data and
+compile them into one data frame:
+
+First, create lists to be included in your desired column:
+
+Let's add some students:
+
+```{r}
+
+```
+
+Now, instead of using the matrix approach, we can just store the data
+directly in the data frame:
+
+```{r}
+
+```
+
+In this case, we don't have to worry about specifying which direction
+the data will be stored; each list will serve as a column.
+
+## Importing Data Frames
+
+If you have secondary data or data that is in a tabular format
+(something from Excel or Google Sheets), we can use the `tidyverse`
+library to import the data into R for analysis.
+
+### What are "libraries"?
+
+Libraries (or "packages") are collections of functions and compiled code
+in a well-defined format. The directory where the packages are stored is
+called the library. Packages can be installed using
+`install.packages("name of package")`. Installing only needs done once
+per operating system. (Reference similarities in SPSS, Excel, etc.)
+
+```{r}
+
+```
+
+To use the package, use the command `library(name of package)` -- note
+that with `library()`, we do not use quotations, but when installing, we
+do. Alternatively, we may use the `Packages` pane in the Files window in
+the bottom right and check the box of the package we'd like to use.
+
+```{r}
+
+```
+
+Libraries expand your capabilities in R tremendously! For now, we will
+just use `tidyverse` -- the main package for importing and tidying data,
+but will be installing and using different packages later for our
+analyses. (What's included?)
+
+**For Excel extensions:** `.csv` files are the most flexible and are
+widely used, making `read_csv()` likely the most useful to you. Data can
+be "read in" or "called" into use by using command:
+`data_csv <- read_csv("fileName.csv")`
+
+`.xlsx` files are exclusive to Microsoft Excel and allow for different
+tabs and pages in the overall document. Some use `.csv` files for raw
+data and `.xlsx` for presented/sorted/cleaned data. In the event that
+your data is attached with the `.xlsx` extension, one can either
+`Save As` and change the extension to `.csv` or read in the data using
+the `readxl` package -- which you may need to install before use:
+`data_xlsx <- read_excel("fileName.xlsx")`
+
+**For `.txt` extensions:**
+
+Text documents can be formatted many different ways. In a text file, we
+don't have the convenience of placing items into cells. Instead, we
+separate data using some form of punctuation: `,`, `.`, `:`, or `;`. or
+with a set distance between items. The punctuation and/or distance
+between data in a `.txt` file is called a **delimiter**.
+
+See <https://www.datacamp.com/tutorial/r-data-import-tutorial> for steps
+to import other types of data (Databases, JSON, or HTML).
+
+Try importing the file `testData.csv` into your workspace:
+
+```{r}
+
+```
+
+**Q:** What data types are `x1`, `x2`, `x3`, `x4`, and `x5`? (Try and find it
+in the output above!)
+
+**A:** All of the values in our testData dataframe are doubles.
+
+Let's take a look at the data:
+
+```{r}
+# Can either use:
+
+
+# or
+ # This will open a separate window in the source pane and is easier to examine with larger datasets
+```
+
+Obviously our column headers aren't very informative. Using what we
+learned above, rename the column headers:
+
+-   `x1` to be `Height`
+-   `x2` to be `Weight`
+-   `x3` to be `Gender`
+-   `x4` to be `Class`
+-   `x5` to be `Age`
+
+```{r}
+
+```
+
+## Data Manipulation:
+
+Let's quickly pivot to the concept of **factors** (nominal, categorical,
+ordinal, boolean). A factor is a type of variable that allows us to
+classify and organize groups. For example, a clinical study may be
+testing the effects of a certain medication against a placebo. We could
+include a factor variable indicating `0` for patients receiving the
+tested medication and `1` for patients who have received the placebo. As
+we'll discuss in Part 2 of this workshop, factors are useful in many
+statistical tests and models: two-sample T-tests, ANOVA, etc.
+
+Factors are a special type of variable that we did not mention above,
+and we can specify which variables are factors. If we do this manually,
+variable by variable, we reference each column using `$` and apply `as.factor(df$Var)`:
+
+```{r}
+
+```
+
+We've introduced some new notation: `$`. The dollar sign, included
+immediately after the name of the dataframe, allows us to reference an
+entire column, the name of which we tie to the dollar sign:
+
+```{r}
+ # Now that we have Gender as a factor, we have someting additional in our output: Levels: 0 1
+```
+
+(***Note:*** We also use `$` to assign new variables not included in the
+original dataframe.)
+
+Now, try turning our `Class` variable into a factor instead of a double.
+Check if you did it correctly!
+
+```{r}
+
+```
+
+Aside from re-classifying our variable types (called **coercion**),
+three important and very useful commands are `select()`, `filter()`, and
+`mutate()` from the `dplyr` package.
+
+Try installing and loading the `dplyr` package, if you have not already
+done so/have it installed:
+
+```{r}
+
+```
+
+Now we have those manipulation commands available to us. What do they
+do?
+
+-   `select()` is pretty straightforward: this is what we use to select
+    specific variables/columns.
+-   `filter()` is used to subset a data frame, retaining all rows that
+    satisfy our conditions.
+-   `mutate()` is a bit more complicated, but allows us the freedom to
+    perform arithmetic or apply logical operators in order to change (or
+    create!) variables.
+
+To implement these efficiently, we use something called a **pipe**. We
+can "pipe" dataframes into the command to specify which dataframe to
+perform the command on. The pipe operator is defined as `%>%` or `%<%` ,
+two percent symbols sandwiching a directed arrow (less-than or
+greater-than sign). This works seamlessly with the three mutation
+functions above, allowing for cleaner, more compact code.
+
+**Note:** Instead of typing the pipe out each time, we use the keyboard
+shortcut `CTRL + SHIFT + M` for Windows in a chunk (`CMD + SHIFT + M`
+for MacOS). This will, by default, use the right-ward facing pipe,
+`%>%`, which is typically the standard form.
+
+### `select()`
+
+Let's see how the `select()` function works:
+
+```{r}
+# df %>% select(VariableName)
+
+```
+
+If we want to select multiple variables, we create a list within the
+`select()` function:
+
+```{r}
+
+```
+
+**Note:** We do not include quotation marks around the variables. Some
+programming languages require this; R does not.
+
+Try selecting the `Weight` and `Class` columns from our `testData`
+dataframe:
+
+```{r}
+
+```
+
+### `filter()`
+
+Let's see how the `filter()` function works:
+
+Say we want all observations having a value in our Weight column less than
+or equal to 150:
+
+```{r}
+
+```
+
+If we classify our `Gender` variable as `0` being `Males` and `1` being
+`Females`, filter out all data for our imaginary female participants:
+
+*Remember, we use logical operators in our `filter()` function. If we
+want to filter cases where a certain variable equals our criteria, use
+`==`:*
+
+```{r}
+
+```
+
+If we have multiple conditions that need satisfied simultaneously, we
+use `&` (and). For example, if we wanted all females in class 2, our
+syntax would be:
+
+```{r}
+
+```
+
+For "and" conditions, both must be true. We have another logical
+operator `|` (or). If we wanted to filter all participants in classes 1
+or 2, our syntax would be:
+
+```{r}
+
+```
+
+**Challenge:** Apply the logic where we filter intersection (and) of being in class 1 or class 2 and being female.
+
+```{r}
+
+```
+
+In the event we want to leave a class out but keep every other one,
+instead of having `filter(Class == 2 | Class == 3 | Class == 4)`, if we
+wanted to leave Class 1 out, we use `!` (exclamation point) to
+
+```{r}
+
+```
+
+**Challenge:** Combining `filter()` and `select()`. Filter the
+observations for male participants with `Weight` less than or equal to
+170. Then, select the Height and Weight.
+
+*Hint:* You will need to use two pipe operators. The order in which you
+use `filter()` and `select()` matters! Why?
+
+```{r}
+
+```
+
+### `mutate()`
+
+The mutate command/function is useful in many applications. The options
+are limitless, but consider you wanted to standardize your data or
+re-group your observations (this would be called "re-coding your
+variables").
+
+To start, let's do a simple example. Let's create a new column "Random"
+that scales our Weight column by 10:
+
+```{r}
+# Syntax: df %>% mutate(NewVarName = Equation)
+
+  
+# You'd generally want to store this new data frame (with the mutated column) into a new dataframe:
+
+```
+
+## Recoding Variables:
+
+If we wanted to re-code our variables (let's say we want `Male` to be 1
+and `Female` to be 2, instead of the previous `0-1` definition). It's a
+bit more complicated, but if we include some logic, it simplifies our
+code:
+
+### Recode into Same Variable
+
+```{r}
+# Syntax: df %>% mutate(SameVar = ifelse(test = (Criteria), yes = Condition if True, no = Condition if False)
+
+```
+
+**Note:** When using `mutate()`, we must be careful. Note that the data
+type has been changed back into a `dbl` with this manipulation. We would need
+to coerce this, using `as.factor(df$Var)`, back into a factor.
+
+### Recode into New Variable:
+
+We recommend this so you don't lose any previous data. This is important
+for large-scale projects, and is especially important if you are tasked
+with reporting and documenting every manipulation.
+
+```{r}
+# Syntax: df %>% mutate(NewVar = ifelse(test = (Criteria), yes = Condition if True, no = Condition if False)
+
+```
+
+The syntax would be read as: "If Gender is 0, change that number to 1.
+If it is not 0, change it to 2." Again, this mutation coerced the new
+data column to a double, so we would need to change this again.
+
+Of course the more conditions you have, or if you have more variables
+you'd like to change at once, we would include nested `ifelse()`
+statements. I think this is a bit beyond the scope, but if you were
+curious, we would add another `ifelse()` function under the `no =`
+argument in the previous `ifelse()` statement.
+
+## Renaming Factors:
+
+First, we must check the pre-defined order of the factors (ie. our
+factors order may not be sequential). To do so, we use the command
+`levels(df$FactorVariable)`:
+
+```{r}
+
+```
+
+We see from the output that our factors are ordered 1, 2, 3, 4.
+
+Note: The sequential ordering may not be the case; you may have
+performed some manipulation that ends up reordering the factors, so it
+is imperative we check the ordering with `levels()`.
+
+To rename, store a list into `levels(df$FactorVariable)`in the same
+order they are listed. If we define 1 to be Freshman, 2 to be Sophomore,
+3 to be Junior, and 4 to be Senior:
+
+```{r}
+
+```
+
+Now we see that all the factors now reflect the newly defined factor
+names:
+
+```{r}
+
+```
+
+Try doing the same with our Gender variable; recall 1 is now Male and 2
+is now female. Check the ordering to make sure we will not accidentally
+swap Males and Females!
+
+```{r}
+# Check ordering:
+levels(testData$Gender)
+```
+
+```{r}
+# Rename levels:
+
+```
+
+```{r}
+# Check the updated data:
+
+```
+
+With this manipulation, the factors remain factors; we do not need to
+coerce. This is the preferred method for recoding **factors**.
+
+## Exercises
+
+For this section, instructions will be provided, but chunks will not be.
+(Do you remember how to create a chunk?) Let's try the following
+exercises!
+
+1)  Subset (either using `filter()`, `select()` or both) your dataset:
+
+a)  Create two datasets, one for the male participants and another for
+    the female participants. Store these in appropriately named
+    dataframes.
+
+```{r}
+# With factors that are characters (instead of 0 for Male or 1 for Female), we must include quotations. This tells R to quite literally search for the word "Male" or "Female", in this case:
+
+```
+
+b)  Now, create 4 datasets, one for each class standing. Store these in
+    appropriately named dataframes.
+
+```{r}
+
+```
+
+2)  Manipulating Data:
+
+a)  Using the original dataset (testData.csv), assume the Height column
+    is in centimeters. Use the appropriate `dplyr` function (`select()`,
+    `filter()`, or `mutate()`) to convert the measurements to feet (1 ft
+    = 30.48 cm). Store this in the original Height column.
+
+```{r}
+
+```
+
+b)  Consider the following scenario: The person who collected this data
+    inappropriately reported the weight due to a faulty scale,
+    over-reporting the individuals' weights by 25 lbs. Perform the
+    appropriate mutation and store the corrected dataframe as
+    "cleanedData".
+
+```{r}
+
+```
+
+## Exporting Data:
+
+To wrap up the day, I want to share a nice tool for exporting data from
+RStudio. The syntax is relatively straightforward:
+`write.csv(dataFrame, "dataFrame.csv")`, where the first argument is the
+dataframe stored in your session's workspace, and the second argument is
+the exported name of the file. Once this is complete, you should see the
+new `x.csv` file in your Files pane to the right!
+
+The third argument `row.names` is optional; it requires either TRUE (T)
+or FALSE (F). This is useful for not adding an additional column for
+just the row number. The row number is likely something you aren't
+interested in; you may have an ID column, for survey data, for example,
+but that will remain in the data set as it was a defined variable.
+
+```{r}
+
+```
+
+(I always include `row.names = FALSE`.)
+
+And finally, we have the option to save our workspace environment. To do this, we can just hit the floppy "Save workspace as" button, to the left of "Import Dataset". This will automatically save all working variables and dataframes from today. It's generally good practice to save your workspace, perhaps every session or maybe once a week -- depends how much work you do in that day.
+
+Why do this? This isn't a necessary step. A convenient part of R is that it will prompt you upon exiting the application if you want to save your workspace. If you are using an R project to house your work, your workspace will be saved for your next session. However, your workspace environment can become lengthy and jumbled, especially if you have items or variables with similar names. It's all personal preference! For purposes of this workshop, let's save our workspace; we will use some of the variables and dataframes we created today in Part 2.
