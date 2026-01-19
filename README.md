@@ -14,4 +14,15 @@ We investigate the finite sample properties via a simulation study in RStudio. T
 study shows minimal and decreasing bias in the maximum likelihood estimators, and that
 the standard errors can be approximated using the inverse observed information matrix. The
 model and asymptotic properties are used to examine the indolent non-Hodgkin’s lymphoma
-data set from Gonzalez, Peña, and Slate
+data set from Gonzalez, Peña, and Slate.
+
+## Applications of the Model: non-Hodgkins Lymphoma Data
+
+*Brief Background:* Non-Hogdkins Lymphoma (NHL) is a class of lympatic cancer diagnoses that can be partitioned into two groups: indolent and aggressive. Indolent NHL is slower-progressing, generally having longer survival processes. It is understood that patients with NHL tend to experience several relapses over time. [1]
+
+The model:
+
+$$\delta$$
+
+References:
+[1] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
