@@ -1,11 +1,11 @@
 # Welcome to my Portfolio!
-Hello! My name is Toby Trotta, an early-career professional seeking a data scientist or data analyst role. Residing in the greater Pittsburgh region, I earned a Bachelor of Science in Mathematics with a concentration in Actuarial Science from Edinboro University of Pennsylvania (now Pennsylvania Western University), where I developed a strong interest in statistics and programming.
+Hello! My name is Toby Trotta, an early-career professional seeking a data scientist or data analyst role. Residing in the greater Pittsburgh region, I earned a Bachelor of Science in Mathematics with a concentration in Actuarial Science from Edinboro University of Pennsylvania (EUP) (now Pennsylvania Western University), where I developed a strong interest in statistics and programming.
 
-My academic foundation began with learning the core principles of data science, statistical programming, machine learning, and parallel computing using RStudio, leading to a lasting proficiency in—and appreciation for—the R programming language. During my graduate studies at Indiana University of Pennsylvania, I expanded my technical toolkit by working primarily in Python, developing both probabilistic and deterministic operations research models, as well as conducting data science analyses using libraries such as Pandas, SciPy, scikit-learn, and statsmodels within Jupyter Notebook and Google Colab environments.
+My academic foundation began with learning the core principles of data science, statistical programming, machine learning, and parallel computing using RStudio, leading to a lasting proficiency in—and appreciation for—the R programming language. During my graduate studies at Indiana University of Pennsylvania (IUP), I expanded my technical toolkit by working primarily in Python, developing both probabilistic and deterministic operations research models, as well as conducting data science analyses using libraries such as Pandas, SciPy, scikit-learn, and statsmodels within Jupyter Notebook and Google Colab environments.
 
 I invite you to explore my growing portfolio, beginning with selected work from my thesis, *A General Class of Additive Parametric Models for Recurrent Event Data*. This project presents the theoretical development and empirical testing of an intervention-based effective age model, completed under the guidance of Dr. Russell Stocker IV.
 
-# A General Class of Additive Parametric Models for Recurrent Event Data
+# 🎓 :page_facing_up: A General Class of Additive Parametric Models for Recurrent Event Data
 
 My master's thesis was advised by Dr. Russell Stocker, IV, Associate Professor of Mathematics at Indiana University of Pennsylvania's Department of Mathematical and Computer Sciences. The full text can be found on [ProQuest](https://www.proquest.com/openview/408ecd24e6e05b01b624ef0013797b3b/1?pq-origsite=gscholar&cbl=18750&diss=y).
 
@@ -27,9 +27,9 @@ We let the random variable *S* represent the time when a unit experiences an eve
 
 $$\lambda_i(s|\boldsymbol{\theta, \boldsymbol{\beta}}) = \lambda_0(\mathcal{E}_i(s)|\boldsymbol{\theta}) + \beta^TX_i$$
 
-### Applications of the Model: non-Hodgkins Lymphoma Data
+### :hospital: Applications of the Model: non-Hodgkins Lymphoma Data
 
-***Brief Background:*** Non-Hogdkins Lymphoma (NHL) is a class of lympatic cancer diagnoses that can be partitioned into two groups: indolent and aggressive. Indolent NHL is slower-progressing, generally having longer survival processes. It is understood that patients with NHL tend to experience several relapses over time. [3]
+***Brief Background:*** Non-Hogdkins Lymphoma (NHL) is a class of lymphatic cancer diagnoses that can be partitioned into two groups: indolent and aggressive. Indolent NHL is slower-progressing, generally having longer survival processes. It is understood that patients with NHL tend to experience several relapses over time. [3]
 
 **References:**
 [1] E. Peña and M. Hollander, *Mathematical Reliability: An Expository Perspective*,
@@ -40,3 +40,7 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
+# :computer: :chart_with_upwards_trend: RStudio Workshop
+
+As a Research Assistant with IUP's Applied Research Lab (ARL), I was given the opportunity to host an RStudio Programming Workshop during IUP's Research Appreciation Week. During this two-day workshop, I instructed a class of approximately 10 participants. I encourage those who are interested in learning RStudio to view both the blank RMarkdown worksheets for practice and the respective "Key" files for answers at your own pace. :blush:
