@@ -1,0 +1,86 @@
+---
+title: "Spotify Data Analysis: 2009-2025"
+author: "Toby Trotta"
+date: "2026-01-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(dplyr)
+library(psych)
+library(sqldf)
+library(DBI)
+library(RSQLite)
+
+conn <- dbConnect(SQLite(), ":memory:")
+```
+
+```{r}
+spotify_clean <- read.csv("spotify_data clean.csv")
+track_clean <- read.csv('track_data_final.csv')
+
+dbWriteTable(conn, 'spotify', spotify_clean)
+dbWriteTable(conn, 'track', track_clean)
+```
+
+```{r}
+# Average Song Popularity by Artist
+avgsongpop <- dbGetQuery(conn, "
+      SELECT *
+        FROM (SELECT artist_name,
+          ROUND(AVG(track_popularity), 2) AS avg_pop,
+          COUNT(*) AS count_song
+        FROM track
+        GROUP BY artist_Name
+        ORDER BY count_song DESC
+        LIMIT 20)
+      ORDER BY avg_pop DESC
+")
+
+avgsongpop
+
+avgsongpop %>% ggplot(aes(x = avg_pop, y = reorder(artist_name, avg_pop))) +
+  geom_point() +
+  labs(x = "Average Popularity Score",
+       y = "Artist Name",
+       title = "Artist Average Popularity Score",
+       subtitle = "Spotify Data: 2009-2023")
+```
+
+```{r}
+# Average Song Popularity by Artist, including primary genre
+primary_genre <- dbGetQuery(conn, "
+      SELECT artist_name,
+        COALESCE(NULLIF(REPLACE(
+          REPLACE(SUBSTR(artist_genres,
+            (CHARINDEX(',', artist_genres) - 1), -LENGTH(artist_genres)),
+          '[', ''),
+        '''', ''), ''), 'NA') AS primary_genre
+      FROM track
+      WHERE primary_genre <> 'NA'
+      GROUP BY artist_name
+")
+```
+
+```{r}
+# Album Release Dates, First & Recent, by Artist
+time_elapsed <- dbGetQuery(conn, "SELECT artist_name,
+        MAX(DATE(album_release_date)) AS recent_release,
+        MIN(DATE(album_release_date)) AS first_release,
+        (MAX(DATE(album_release_date)) - MIN(DATE(album_release_date))) AS years,
+        COUNT(*) as no_of_tracks
+        FROM (
+          SELECT * 
+          FROM track
+          WHERE DATETIME(album_release_date) > '0000-00-00'
+        )
+        GROUP BY artist_name
+        ORDER BY no_of_tracks DESC
+")
+
+time_elapsed %>% ggplot(aes(x = years, y = avg_pop)) +
+  geom_point()
+```
+
