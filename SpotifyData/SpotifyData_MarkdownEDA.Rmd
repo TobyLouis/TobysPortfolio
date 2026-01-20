@@ -13,17 +13,38 @@ library(psych)
 library(sqldf)
 library(DBI)
 library(RSQLite)
+library(ggthemes)
+library(knitr)
+library(kableExtra)
 
 conn <- dbConnect(SQLite(), ":memory:")
 ```
 
+#
+
 ```{r}
+# Importing Data:
 spotify_clean <- read.csv("spotify_data clean.csv")
 track_clean <- read.csv('track_data_final.csv')
 
+# Establish database table format for SQL queries:
 dbWriteTable(conn, 'spotify', spotify_clean)
 dbWriteTable(conn, 'track', track_clean)
 ```
+
+```{r}
+spotify_clean %>% kbl() %>% 
+  kable_classic_2() %>% 
+  head(10)
+```
+
+```{r}
+track_clean %>% kbl() %>% 
+  kable_classic_2() %>% 
+  head(10)
+```
+
+# Data Overview:
 
 ```{r}
 # Average Song Popularity by Artist
@@ -51,8 +72,12 @@ avgsongpop %>% ggplot(aes(x = avg_pop, y = reorder(artist_name, avg_pop))) +
 
 ```{r}
 # Average Song Popularity by Artist, including primary genre
+
+# Selecting first genre listed in `artist_genres` column;
+# to be treated as the primary genre.
+
 primary_genre <- dbGetQuery(conn, "
-      SELECT artist_name,
+      SELECT *,
         COALESCE(NULLIF(REPLACE(
           REPLACE(SUBSTR(artist_genres,
             (CHARINDEX(',', artist_genres) - 1), -LENGTH(artist_genres)),
@@ -62,7 +87,118 @@ primary_genre <- dbGetQuery(conn, "
       WHERE primary_genre <> 'NA'
       GROUP BY artist_name
 ")
+dbWriteTable(conn, 'track_g', primary_genre)
+dbReadTable(conn, 'track_g')
+
+genre_count <- dbGetQuery(conn, "
+      SELECT primary_genre, COUNT(*) as count
+      FROM track_g
+      GROUP BY primary_genre
+      ORDER BY count DESC")
+genre_count
+
+# How many different categories of 'pop' music are included in this set?
+dbGetQuery(conn, "
+      SELECT primary_genre, COUNT(*) AS count
+      FROM track_g
+      GROUP BY primary_genre
+      HAVING primary_genre NOT LIKE '%pop'
+      ORDER BY count DESC
+")
 ```
+
+Due to the 29 types of 'pop' music, it would be simpler for our analysis to return these all as 'pop':
+```{r}
+dbExecute(conn, "
+      ALTER TABLE track_g
+      ADD category VARCHAR(255)
+")
+
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'pop'
+      WHERE primary_genre LIKE '%pop%'")
+
+# R&B:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'r&b'
+      WHERE primary_genre LIKE '%r&b%'")
+
+
+# House:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'house'
+      WHERE primary_genre LIKE '%house%'")
+
+
+# Hip hop:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'hip hop'
+      WHERE primary_genre LIKE '%ip%hop%'") # to include "trip" and "hip"
+
+
+# Rock:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'rock'
+      WHERE primary_genre LIKE '%rock%'")
+
+# Techno:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'techno'
+      WHERE primary_genre LIKE '%techno%'")
+
+# Country:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'country'
+      WHERE primary_genre LIKE '%country%'")
+
+# Rap:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'rap'
+      WHERE primary_genre LIKE '%rap%'")
+
+
+# Metal:
+dbExecute(conn, "
+      UPDATE track_g
+      SET category = 'metal'
+      WHERE primary_genre LIKE '%metal%'")
+
+# Rename "Category" column to "Genre," a more suitable name.
+dbExecute(conn, "
+      ALTER TABLE track_g
+      RENAME COLUMN category TO genre")
+
+genres <- dbGetQuery(conn, "
+           SELECT genre,
+            COUNT(*) as count
+           FROM track_g
+           WHERE genre <> 'NA'
+           GROUP BY genre
+           ORDER BY count DESC
+")
+genres
+
+genres %>% ggplot(aes(x = reorder(genre, count), y = count, fill = genre)) +
+  geom_bar(stat = 'identity') +
+  geom_text(aes(label = count), vjust = 2) +
+  labs(x = "Genre",
+       y = "Count",
+       title = "Genre Distribution",
+       subtitle = "Spotify Data: 2009-2003
+531 tracks not classified into this grouping") +
+  theme_par() +
+  theme(legend.position = 'none') + scale_fill_brewer(palette = "Set3")
+```
+
+
 
 ```{r}
 # Album Release Dates, First & Recent, by Artist
