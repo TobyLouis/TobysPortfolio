@@ -33,6 +33,8 @@ $$\lambda_i(s|\boldsymbol{\theta, \boldsymbol{\beta}}) = \lambda_0(\mathcal{E}_i
 
 ***Brief Background:*** Non-Hogdkins Lymphoma (NHL) is a class of lymphatic cancer diagnoses that can be partitioned into two groups: indolent and aggressive. Indolent NHL is slower-progressing, generally having longer survival processes. It is understood that patients with NHL tend to experience several relapses over time. [3]
 
+***More to come...***
+
 **References:**
 
 [1] E. Peña and M. Hollander, *Mathematical Reliability: An Expository Perspective*,
