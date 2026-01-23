@@ -1,0 +1,52 @@
+---
+title: "Census Data"
+author: "Toby Trotta"
+date: "2026-01-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+census_api_key(MY_API_KEY)
+library(httr)
+library(jsonlite)
+library(tidyverse)
+library(tidycensus)
+library(DBI)
+library(RSQLite)
+
+conn <- dbConnect(SQLite(), ":memory:")
+```
+
+```{r}
+variables <- "AGE,DATE_DESC,POP,YEAR,SEX"
+```
+
+
+```{r}
+test_get <- GET(paste0("https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&for=county:*&in=state:42&key=", Sys.getenv("MY_API_KEY")), header = T)
+
+census_data <- GET(paste0("https://api.census.gov/data/2017/popproj/nat?get=", variables,
+                  "&for=us:*&key=", Sys.getenv("MY_API_KEY")))
+```
+
+```{r}
+str(test_get$content)
+
+test <- content(test_get, as = 'text') %>% fromJSON() %>% as.data.frame()
+names(test) <- test[1,]
+test <- test[-1,]
+glimpse(test)
+
+View(test)
+
+dbWriteTable(conn, 'test_df', test)
+
+dbGetQuery(conn, "
+      SELECT NAME [PA County],
+        POP [Population]
+      FROM test_df
+      ORDER BY Population
+")
+```
+
