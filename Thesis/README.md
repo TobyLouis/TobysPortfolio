@@ -5,7 +5,7 @@
 This project presents the theoretical development and empirical testing of an intervention-based effective age model:
 * [Model Components](#-Model-Components)
 * [Statistical Programming Methods](#-Statistical-Programming-Methods)
-* [Applications of the Model: non-Hodgkins Lymphoma Data](#-Applications-of-the-Model:-non-Hodgkins-Lymphoma-Data)
+* [Applications of the Model (Lymphoma Remission)](#-Applications-of-the-Model-(Lymphoma-Remission))
 
 ## Model Components:
 ***Effective Age Process***: The effective age process under Peña and Hollander [2], which is an observable process \{ $\mathcal{E}_{i}(s) | 0 \leq s < \infty$ \} that describes the operating age of the unit, must adhere to the following conditions:
@@ -26,7 +26,7 @@ $$\lambda_i(s|\boldsymbol{\theta, \boldsymbol{\beta}}) = \lambda_0(\mathcal{E}_i
 
 ## Statistical Programming Methods:
 
-## Applications of the Model: non-Hodgkins Lymphoma Data
+## Applications of the Model (Lymphona Remission)
 
 ***Brief Background:*** Non-Hogdkins Lymphoma (NHL) is a class of lymphatic cancer diagnoses that can be partitioned into two groups: indolent and aggressive. Indolent NHL is slower-progressing, generally having longer survival processes. It is understood that patients with NHL tend to experience several relapses over time. [3]
 
@@ -42,6 +42,7 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
 
 
 
