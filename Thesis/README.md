@@ -26,6 +26,14 @@ $$\lambda_i(s|\boldsymbol{\theta, \boldsymbol{\beta}}) = \lambda_0(\mathcal{E}_i
 
 ## Statistical Programming Methods:
 
+The data simulation and analysis were conducted using RStudio, using a combination of the following packages:
+
+* `tidyverse` & `dplyr` - data manipulation, importation
+* `rrcov` - computing multivariate covariance estimators
+* `gt` - data table publishing, customization
+* `psych` - data screening
+* `matlib` - inverse calculation
+
 ## Applications of the Model (Lymphona Remission)
 
 ***Brief Background:*** Non-Hogdkins Lymphoma (NHL) is a class of lymphatic cancer diagnoses that can be partitioned into two groups: indolent and aggressive. Indolent NHL is slower-progressing, generally having longer survival processes. It is understood that patients with NHL tend to experience several relapses over time. [3]
@@ -42,6 +50,7 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
 
 
 
