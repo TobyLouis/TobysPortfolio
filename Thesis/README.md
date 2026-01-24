@@ -1,5 +1,5 @@
-# A General Class of Additive Parametric Models for Recurrent Event Data
-### Advised by: Dr. Russell S. Stocker
+## A General Class of Additive Parametric Models for Recurrent Event Data
+*Toby L. Trotta, August 2024; Advised by: Dr. Russell S. Stocker*
 
 This project presents the theoretical development and empirical testing of an intervention-based effective age model.
 
@@ -35,3 +35,4 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
