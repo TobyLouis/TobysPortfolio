@@ -3,9 +3,9 @@
 [Full Text](https://www.proquest.com/openview/408ecd24e6e05b01b624ef0013797b3b/1?pq-origsite=gscholar&cbl=18750&diss=y).
 
 This project presents the theoretical development and empirical testing of an intervention-based effective age model:
-	- [Model Components](#-Model-Components)
-	- [Statistical Programming Methods](#-Statistical-Programming-Methods)
-	- [Applications of the Model: non-Hodgkins Lymphoma Data](#-Applications-of-the-Model:-non-Hodgkins-Lymphoma-Data)
+* [Model Components](#-Model-Components)
+* [Statistical Programming Methods](#-Statistical-Programming-Methods)
+* [Applications of the Model: non-Hodgkins Lymphoma Data](#-Applications-of-the-Model:-non-Hodgkins-Lymphoma-Data)
 
 ## Model Components:
 ***Effective Age Process***: The effective age process under Peña and Hollander [2], which is an observable process \{ $\mathcal{E}_{i}(s) | 0 \leq s < \infty$ \} that describes the operating age of the unit, must adhere to the following conditions:
@@ -42,6 +42,7 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
 
 
 
