@@ -34,6 +34,7 @@ The data simulation and analysis were conducted using RStudio, using a combinati
 * `psych` - data screening
 * `matlib` - inverse calculation
 * `stats` - multivariate optimization
+* `doParellel` - for parallel processing
 
 For the finite sample testing, we simulated observations subject to the following parameters:
 
@@ -80,22 +81,28 @@ cumulative_gap <- function(x, t1, t2,
 }
 ```
 
+Since my programming structure involved nested `for` loops (with 1,000 simulations and three repair probabilities (`psim_list`)), there were two methods we considered, both mathematically and computationally, to minimize processing time:
+
+* Include a lower bound on the optimized parameter set `t1 >= 0` and `t2 >= 0`, as our scale and shape parameters in the model, $\theta_1$ and $\theta_2$, must be non-negative when the hazard is of the Weibull form.
+* Utilize the `doParallel` package to run parallel processing in RStudio.
 ```
-for (i in seq(1, sims, 1)) {
-  # Simulate Data:
-  data <- simulateData(psim, a, simUnits,
-                           t1.Ba, t2.Ba, B1.Ba, B2.Ba)
-  simData <- data[[1]]
-  gapTimes <- data[[2]]
-  
-  # Perform Optimization:
-  tryCatch(optim.output <- optim(parameters.Ba, loglikelihood, df = simData,
-                        hessian = TRUE, method = 'SANN'),
-      error = function(e) {
-        message(paste('An error occurred for item', i, ':\n'), e)
-      }
-  )
-  ...
+for(psim in psim_list) {
+   ...
+    for (i in seq(1, sims, 1)) {
+      # Simulate Data:
+      data <- simulateData(psim, a, simUnits, t1, t2, B1, B2)
+      simData <- data[[1]]
+      gapTimes <- data[[2]]
+        
+      # Perform Optimization:
+      tryCatch(optim.output <- optim(par_set, loglikelihood, df = simData,
+                                    hessian = TRUE, method = 'L-BFGS-B',
+                                    lower = c(0, 0, -Inf, -Inf)),
+            error = function(e) {
+              message(paste('An error occurred for item', i, ':\n'), e)
+            }
+        )
+    ...
 }
 ```
 
@@ -115,6 +122,7 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
 
 
 
