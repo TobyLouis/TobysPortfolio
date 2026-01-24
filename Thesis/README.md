@@ -33,6 +33,71 @@ The data simulation and analysis were conducted using RStudio, using a combinati
 * `gt` - data table publishing, customization
 * `psych` - data screening
 * `matlib` - inverse calculation
+* `stats` - multivariate optimization
+
+For the finite sample testing, we simulated observations subject to the following parameters:
+
+* The censoring times, $\tau_i$, are independent and identically distributed Uniform(0, $a$) random variables;
+* The hazard function includes a time-independent covariate vector $X_i = (X_1, X_2)^T$ with $X_1 \sim \text{Bernoulli}(0.5)$ and $X_2 \sim \text{Uniform}(0, 1)$;
+* The baseline hazard function is of the Weibull form with a scale parameter $\theta_1$ (to alter spread) and a shape parameter $\theta_2$ (to represent failure rate);
+
+$$ \lambda_i(s|\boldsymbol{\theta, \boldsymbol{\beta}}) = \theta_1 \theta_2 (\theta_1 \mathcal{E}_i(s))^{\theta_2 - 1} + \beta^TX_i $$
+
+*Note:* The value for $a = 2$ for this simulation study. It was obtained by trial and error to return an average number of events experienced, $\mu_E$, to be 3 before the unit is censored.
+
+In simulating the event times, we utilized the random variable $E \sim \text{Exp}(1)$. The gap times were simulated using the inverse cumulative hazard function, evaluated at a random observation taken from $E$, utilizing the `uniroot` function (since the inverse cumulative hazard does not have a closed form representation).
+
+Further, we used the `optim` function under the limited memory BFGS (Broyden-Fletcher-Goldfarb-Shanno) (L-BFGS-B) method to perform the maximum likelihood estimation. 
+
+Some example code:
+```
+## Returns the time at which the event occurs:
+## Ex. When a unit enters the study, its `age = 0`, increasing as the study continues (code not shown).
+
+# Inverse Cumulative Hazard Function:
+inv_cumulative_haz <- function(age, t1, t2, B, X) {
+  
+  E <- rexp(1, 1)
+
+  ## Evaluates cumulative hazard function for values of age:
+  # Use uniroot to find inverse:
+  root <- uniroot(
+    function(x) cumulative_gap(x, t1, t2, B, X, age) - E,
+    interval = c(0, 10 ^ 100),
+    extendInt = 'yes'
+  )$root
+
+  return(root)
+}
+
+# Cumulative Hazard Function (for Gap Time)
+cumulative_gap <- function(x, t1, t2,
+                           B = matrix(c(1,1), nrow = 2),
+                           X = matrix(c(1,1), nrow = 2),
+                           age) {
+  
+  (t1 ^ t2) * ((age + x) ^ t2 - age ^ t2) + x * (t(B) %*% X)[1]
+}
+```
+
+```
+for (i in seq(1, sims, 1)) {
+  # Simulate Data:
+  data <- simulateData(psim, a, simUnits,
+                           t1.Ba, t2.Ba, B1.Ba, B2.Ba)
+  simData <- data[[1]]
+  gapTimes <- data[[2]]
+  
+  # Perform Optimization:
+  tryCatch(optim.output <- optim(parameters.Ba, loglikelihood, df = simData,
+                        hessian = TRUE, method = 'SANN'),
+      error = function(e) {
+        message(paste('An error occurred for item', i, ':\n'), e)
+      }
+  )
+  ...
+}
+```
 
 ## Applications of the Model (Lymphona Remission)
 
@@ -50,6 +115,7 @@ Analysis, pp. 105–123.
 relapses*, Stat Med., 24 (2005), pp. 3959–3975.
 
 [3] N Delinger, N. Epperla, and B. William, *Management of relapsed/refractory martinal zone lymphoma: focus on ibrutinib*, Cancer Management and Research 10 (2018), pp. 615-624.
+
 
 
 
