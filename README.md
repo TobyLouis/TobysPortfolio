@@ -1,11 +1,18 @@
 # Welcome to my Portfolio!
+
 Hello! My name is Toby Trotta, an early-career professional seeking a data scientist or data analyst role. Residing in the greater Pittsburgh region, I earned a Bachelor of Science in Mathematics with a concentration in Actuarial Science from Edinboro University of Pennsylvania (EUP) (now Pennsylvania Western University), where I developed a strong interest in statistics and programming.
 
 My academic foundation began with learning the core principles of data science, statistical programming, machine learning, and parallel computing using RStudio, leading to a lasting proficiency in, and an appreciation for, the R programming language. During my graduate studies at Indiana University of Pennsylvania (IUP), I expanded my technical toolkit by working primarily in Python, developing both probabilistic and deterministic operations research models, as well as conducting data science analyses using libraries such as Pandas, SciPy, scikit-learn, and statsmodels within Jupyter Notebook and Google Colab environments.
 
-I invite you to explore my growing portfolio!
+I invite you to explore my growing portfolio! My resume can be found [here](https://github.com/user-attachments/files/24993947/TrottaResume_Dec2025.pdf).
 
 Find me on [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/toby-trotta/)
+
+## About Me:
+
+🧑🏻‍🤝‍🧑🏻 I have a twin sister and a younger sister. Hope, my twin, is a Speech Pathologist, and my younger sister, Grace, is currently in her bachelor's program studying Psychology.
+
+🎵 Some of my favorite artists are Lana Del Rey, Madonna, and Alina Baraz. Some of my favorite genres are house, alt pop, and indie.
 
 ### Languages
 ![R](https://img.shields.io/badge/rstudio-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)
@@ -25,6 +32,7 @@ Find me on [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo
 ![Scipy](https://img.shields.io/badge/SciPy-%230C55A5.svg?style=for-the-badge&logo=scipy&logoColor=%white)
 
 ### Other Skills
+![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
 ![Power Bi](https://img.shields.io/badge/power_bi-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 
