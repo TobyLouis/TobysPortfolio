@@ -1,10 +1,10 @@
 # Welcome to my Portfolio!
 
-Hello! My name is Toby Trotta, an early-career professional seeking a data scientist or data analyst role. Residing in the greater Pittsburgh region, I earned a Bachelor of Science in Mathematics with a concentration in Actuarial Science from Edinboro University of Pennsylvania (EUP) (now Pennsylvania Western University), where I developed a strong interest in statistics and programming.
+Hello! My name is Toby Trotta, an early-career professional seeking a data scientist or data analyst role. Residing in the greater Pittsburgh region, I earned a Bachelor of Science in Mathematics with a concentration in Actuarial Science from Edinboro University of Pennsylvania (EUP) (now Pennsylvania Western University) and Master of Science in Applied Mathematics from Indiana University of Pennsylvania (IUP), where I developed a strong passion for probability, statistics, and programming.
 
-My academic foundation began with learning the core principles of data science, statistical programming, machine learning, and parallel computing using RStudio, leading to a lasting proficiency in, and an appreciation for, the R programming language. During my graduate studies at Indiana University of Pennsylvania (IUP), I expanded my technical toolkit by working primarily in Python, developing both probabilistic and deterministic operations research models, as well as conducting data science analyses using libraries such as Pandas, SciPy, scikit-learn, and statsmodels within Jupyter Notebook and Google Colab environments.
+My academic foundation began with learning the core principles of data science, statistical programming, machine learning, and parallel computing using RStudio, leading to a lasting proficiency in, and an appreciation for, the R programming language. During my graduate studies at IUP, I expanded my technical toolkit by working primarily in Python, developing both probabilistic and deterministic operations research models, as well as conducting data science analyses using libraries such as Pandas, SciPy, scikit-learn, and statsmodels within Jupyter Notebook and Google Colab environments.
 
-I invite you to explore my growing portfolio! My resume can be found [here](https://github.com/user-attachments/files/24993947/TrottaResume_Dec2025.pdf).
+I invite you to explore my growing portfolio! My resume can be found [here](https://github.com/user-attachments/files/28795695/TrottaResume.pdf).
 
 Find me on [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/toby-trotta/)
 
